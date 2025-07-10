@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Custom Photo Booth</title>
+    <link rel="icon" type="image/png" href="assets/camera_icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Custom Photo Booth</h1>
+
+        <div class="video-preview-container">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="livePreviewCanvas"></canvas>
+            <div id="countdown-display" class="countdown-display hidden"></div>
+        </div>
+
+        <div class="controls-section">
+            <div class="input-group">
+                <label for="cameraSelect">Camera:</label>
+                <select id="cameraSelect"></select>
+            </div>
+            <div class="input-group">
+                <label for="filterSelect">Filter:</label>
+                <select id="filterSelect">
+                    <option value="none">None</option>
+                    <option value="grayscale(100%)">Grayscale</option>
+                    <option value="sepia(100%)">Sepia</option>
+                    <option value="invert(100%)">Invert</option>
+                    <option value="brightness(1.5)">Brightness</option>
+                    <option value="contrast(200%)">Contrast</option>
+                    <option value="saturate(200%)">Saturate</option>
+                    <option value="hue-rotate(90deg)">Hue Rotate</option>
+                    <option value="vintage">Vintage</option>
+                    <option value="polaroid">Polaroid</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="layoutSelect">Layout:</label>
+                <select id="layoutSelect">
+                    <option value="1x1">Single (1 photo)</option>
+                    <option value="1x2">1x2 Strip (2 photos)</option>
+                    <option value="2x2">2x2 Grid (4 photos)</option>
+                    <option value="1x4">1x4 Strip (4 photos)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="startButton">Start Camera</button>
+            <button id="stopButton" disabled>Stop Camera</button>
+            <button id="captureButton" disabled>Take Photo</button>
+            <button id="resetButton" disabled>Reset</button>
+        </div>
+
+        <h2>Captured Photos</h2>
+        <div class="captured-photos-thumbnails">
+            <div id="thumbnails-container">
+                </div>
+        </div>
+
+        <div class="strip-section">
+            <h2>Your Photo Strip</h2>
+            <div class="strip-customization-controls">
+                <div class="input-group">
+                    <label for="stripBgColor">Strip Background:</label>
+                    <input type="color" id="stripBgColor" value="#ffebf0">
+                </div>
+                <div class="input-group">
+                    <label for="stripTextColor">Text Color:</label>
+                    <input type="color" id="stripTextColor" value="#880e4f">
+                </div>
+                <div class="input-group">
+                    <label for="stripFontSelect">Text Font:</label>
+                    <select id="stripFontSelect">
+                        <option value="'Oleo Script', cursive">Oleo Script</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Parisienne', cursive">Parisienne</option>
+                        <option value="'Pacifico', cursive">Pacifico</option>
+                        <option value="'Caveat', cursive">Caveat</option>
+                        <option value="'Dancing Script', cursive">Dancing Script</option>
+                        <option value="'Indie Flower', cursive">Indie Flower</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="stripFontSizeInput">Font Size (px):</label>
+                    <input type="number" id="stripFontSizeInput" value="40" min="10" max="100">
+                </div>
+                <div class="input-group">
+                    <label for="headerText">Header Text:</label>
+                    <input type="text" id="headerText" value="MY PHOTO BOOTH!">
+                </div>
+                <div class="input-group">
+                    <label for="footerText">Footer Text:</label>
+                    <input type="text" id="footerText" value="FUN MEMORIES!">
+                </div>
+            </div>
+
+            <h3>Add Stickers!</h3>
+            <p class="sticker-info">(Click to select, then click on the strip to add. Right-click a sticker on the strip to delete.)</p>
+            <div class="sticker-selection-container">
+                <div id="sticker-palette">
+                    </div>
+                <button id="clearStickersButton" disabled>Clear All Stickers</button>
+            </div>
+
+            <h3>Add Custom Text!</h3>
+            <p class="text-info">(Type text, click 'Add Text', then drag on strip. Hold SHIFT + Drag to rotate. Right-click to delete.)</p>
+            <div class="text-input-container">
+                <input type="text" id="customTextInput" placeholder="Enter custom text...">
+                <button id="addCustomTextButton" disabled>Add Text</button>
+                <button id="clearCustomTextButton" disabled>Clear All Custom Text</button>
+            </div>
+
+            <canvas id="finalStripCanvas"></canvas>
+            <button id="downloadStripButton" disabled>Download Photo Strip</button>
+        </div>
+    </div>
+
+    <div id="photoPreviewModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modalImage" src="" alt="Captured Photo Preview">
+            <button id="modalDownloadButton">Download Photo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>>

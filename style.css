@@ -1,0 +1,646 @@
+/* Custom Fonts Definition - Oleo Script and others are imported via link tags in index.html */
+
+/* Import Google Fonts (keep these if you're still using them for other elements like body, h2) */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&family=Parisienne&display=swap');
+
+
+/* --- General Body & Container Styling --- */
+body {
+    font-family: 'Montserrat', sans-serif; /* Modern, clean, and legible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures it covers the full viewport height */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #4A4A4A; /* Changed to a medium dark gray for general text */
+    
+    /* NEW BACKGROUND STYLES */
+    background-image: url('assets/Pink desktop wallpaper aesthetic.jpg'); /* ADJUST THIS PATH IF YOUR IMAGE IS ELSEWHERE OR NAMED DIFFERENTLY */
+    background-repeat: repeat; /* This will tile the image across the background */
+    background-size: auto; /* Use original size of the pattern. You can also try 'contain' or 'cover' if it's a single large image, but 'repeat' with 'auto' is best for patterns. */
+    background-attachment: fixed; /* Keeps the background fixed when content scrolls */
+    background-color: #fce4ec; /* A light pink fallback in case the image doesn't load */
+    /* END NEW BACKGROUND STYLES */
+}
+
+/* The previous body::before for a subtle grid pattern is removed as it conflicts with the new background image pattern. */
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Make container slightly transparent to let background show through */
+    padding: 50px; /* More generous padding for spacious feel */
+    border-radius: 25px; /* Even softer, more inviting corners */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); /* Lighter, more diffused shadow */
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    border: 1px solid #f2d7d9; /* Very subtle light pink border */
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Ensure container is above background effects and animated glows */
+
+    /* NEW: Animation for subtle sparkle/glow */
+    animation: pulseGlow 10s infinite ease-in-out alternate;
+}
+
+/* Decorative Flourish (Optional, for extra aesthetic) */
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #ffe0b2 0%, transparent 70%); /* Soft peach glow */
+    border-radius: 50%;
+    filter: blur(20px);
+    z-index: 0; /* Keep them behind content but above the main background */
+    opacity: 0.6;
+    animation: float1 8s ease-in-out infinite alternate;
+}
+.container::after {
+    top: auto;
+    bottom: -20px;
+    left: auto;
+    right: -20px;
+    background: radial-gradient(circle, #b3e0ff 0%, transparent 70%); /* Soft blue glow */
+    animation: float2 10s ease-in-out infinite alternate;
+}
+
+@keyframes float1 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 30px); }
+}
+@keyframes float2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-20px, -30px); }
+}
+
+/* --- Headings --- */
+h1 {
+    font-family: 'Oleo Script', cursive; /* Applied 'Oleo Script' font */
+    font-weight: 700; /* Using the bold version for more impact */
+    font-size: 3.8em;
+    color: #FF69B4; /* Changed to Hot Pink - a softer, more universally appealing pink */
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+
+    /* --- "GLITTER" TEXT EFFECT FOR H1 --- */
+    text-shadow:
+        1px 1px #FFFACD,   /* Light Yellow (Creamy) sparkle */
+        -1px -1px #FFFACD,
+        2px -2px #FFB6C1,   /* Light Pink sparkle */
+        -2px 2px #FFB6C1,
+        0px 2px #E6E6FA,    /* Lavender sparkle */
+        2px 0px #E6E6FA,
+        -2px 0px #E6E6FA,
+        0px -2px #E6E6FA,
+        1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h2 {
+    font-family: 'Parisienne', cursive; /* Delicate script for section titles */
+    color: #4E342E; /* Changed to a dark brown for better contrast and soothing feel */
+    margin-top: 35px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* --- Countdown Display --- */
+.countdown-display {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Oleo Script', cursive; /* Also set to Oleo Script for consistency */
+    font-weight: bold;
+    font-size: 9em;
+    color: #d81b60; /* Vibrant pink */
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 30px 60px;
+    border: 4px solid #ff80ab;
+    box-shadow: 0 0 40px rgba(255, 128, 171, 0.7);
+}
+
+/* --- Video and Canvas Styling --- */
+.video-preview-container {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 30px;
+    border: 4px solid #ffb3e6; /* Initial border color */
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    /* NEW: Animation for border pulse */
+    animation: borderPulse 3s infinite alternate;
+}
+
+#video, #livePreviewCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* NEW: Flip horizontally to remove mirror effect */
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1); /* For older WebKit browsers */
+    -moz-transform: scaleX(-1);    /* For older Firefox */
+}
+
+/* Only hide with display: none for elements that should truly be gone */
+.hidden {
+    display: none !important;
+}
+
+/* --- Controls Section Styling --- */
+.controls-section, .filter-controls, .layout-controls, .action-buttons, .strip-customization-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    z-index: 1; /* Ensure controls are above any background effects */
+    position: relative;
+}
+
+.controls-section label, .strip-customization-controls label {
+    font-weight: 600;
+    color: #4E342E; /* Changed to match new h2 color */
+    font-size: 1.1em;
+}
+
+select, input:not([type="color"]) { /* Exclude color input from general styling */
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 17px;
+    min-width: 160px;
+    max-width: 250px;
+    color: #4a148c;
+    transition: all 0.3s ease;
+
+    /* NEW: Softened input fields and select boxes */
+    background: linear-gradient(to bottom, #fce4ec, #fffde7); /* Soft pink to very light yellow */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7); /* Subtle inner shadow + white highlight */
+    border: 1px solid #ffabcb; /* Slightly more vibrant pink border */
+}
+
+select:focus, input:focus:not([type="color"]) {
+    outline: none;
+    /* NEW: Enhanced focus state with a slightly more prominent glow */
+    border-color: #d81b60;
+    box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.5), inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Specific styling for color input to make it look good */
+input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 60px; /* Smaller width for color picker */
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden; /* To hide the default color input border/shadow */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: box-shadow 0.2s;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid #ffabcb; /* A border around the color swatch */
+    border-radius: 6px;
+}
+
+input[type="color"]::-moz-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-moz-color-swatch {
+    border: 2px solid #ffabcb;
+    border-radius: 6px;
+}
+
+input[type="color"]:focus {
+    box-shadow: 0 0 0 3px rgba(255, 128, 171, 0.5); /* Focus glow for color picker */
+    outline: none;
+}
+
+
+/* --- Buttons --- */
+button {
+    padding: 16px 32px;
+    margin: 10px;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #e91e63 0%, #ff80ab 100%);
+    color: white;
+    font-family: 'Montserrat', sans-serif; /* Consistent with body font */
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(233, 30, 99, 0.5);
+}
+
+button:hover:not(:disabled) {
+    background: linear-gradient(45deg, #d81b60 0%, #ff4081 100%);
+    transform: translateY(-4px) scale(1.03);
+    /* NEW: Animation for button hover glow */
+    animation: buttonGlow 1s infinite alternate;
+}
+
+button:disabled {
+    background: #f0f0f0;
+    color: #b0b0b0;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    animation: none; /* Disable animation when disabled */
+}
+
+/* --- Captured Photos Thumbnails --- */
+.captured-photos-thumbnails {
+    margin-top: 45px;
+    padding-top: 30px;
+    position: relative; /* Needed for pseudo-elements */
+}
+
+/* NEW: Decorative top border with rounded elements for .captured-photos-thumbnails */
+.captured-photos-thumbnails::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: #ffb3e6; /* Soft pink line */
+    border-radius: 1px;
+}
+.captured-photos-thumbnails::after {
+    content: '♡'; /* Heart symbol */
+    font-size: 2em;
+    color: #ff80ab; /* Vibrant pink heart */
+    position: absolute;
+    top: -15px; /* Adjust to position above the line */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9); /* Background for the symbol */
+    padding: 0 10px;
+    border-radius: 50%; /* Make it round */
+    line-height: 1; /* Adjust vertical alignment */
+}
+
+
+#thumbnails-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 20px;
+    min-height: 120px;
+}
+
+.thumbnail-item {
+    position: relative;
+    border: 3px solid #ffc1e3;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 140px;
+    height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease; /* Change to all for more smooth transitions */
+    transform-origin: center center; /* Ensure scaling is from center */
+    cursor: pointer; /* Indicate clickable */
+}
+.thumbnail-item:hover {
+    transform: scale(1.05) translateY(-5px); /* Slightly larger and lifted */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* More pronounced shadow on hover */
+    border-color: #ff80ab; /* Border changes color on hover */
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.thumbnail-download-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(136, 14, 79, 0.9);
+    color: white;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.95;
+    transition: opacity 0.2s, background-color 0.2s, transform 0.2s;
+}
+.thumbnail-download-btn:hover {
+    opacity: 1;
+    background-color: #ad1457;
+    transform: scale(1.05);
+}
+
+/* --- Photo Strip Section --- */
+.strip-section {
+    margin-top: 50px;
+    padding-top: 40px;
+    position: relative; /* Needed for pseudo-elements */
+}
+
+/* NEW: Decorative top border for strip section */
+.strip-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: #ffb3e6;
+    border-radius: 1px;
+}
+.strip-section::after {
+    content: '🎀'; /* Bow symbol */
+    font-size: 1.8em;
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0 8px;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+#finalStripCanvas {
+    border: 5px solid #ff4081;
+    border-radius: 15px;
+    display: block;
+    margin: 35px auto;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    cursor: grab; /* Default cursor for general dragging */
+}
+
+/* Sticker Palette Styling */
+.sticker-selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#sticker-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 15px; /* More padding */
+    border: 2px dashed #f8bbd0; /* Soft dashed border */
+    border-radius: 15px; /* More rounded */
+    background-color: #fffafc; /* Even lighter, almost white background */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+}
+
+#sticker-palette img {
+    width: 65px; /* Slightly larger stickers in palette */
+    height: 65px;
+    object-fit: contain;
+    cursor: pointer;
+    border: 3px solid transparent; /* Thicker transparent border */
+    border-radius: 8px; /* Slightly more rounded corners */
+    transition: all 0.2s ease;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1)); /* Soft drop shadow for dimension */
+}
+
+#sticker-palette img:hover {
+    border-color: #ff80ab; /* Vibrant pink hover border */
+    transform: scale(1.15) rotate(3deg); /* Larger scale, slight rotation */
+    filter: drop_shadow(0 5px 8px rgba(0,0,0,0.2)); /* More pronounced shadow */
+}
+
+#sticker-palette img.selected {
+    border-color: #d81b60; /* Darker pink for selected */
+    box-shadow: 0 0 10px rgba(216, 27, 96, 0.6); /* More intense glow */
+    transform: scale(1.1) rotate(-3deg); /* Slight rotation when selected */
+}
+
+.sticker-info, .text-info { /* Apply to both info paragraphs */
+    font-size: 0.9em;
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+/* Custom Text Input Section */
+.text-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    border: 2px dashed #f8bbd0;
+    border-radius: 15px;
+    background-color: #fffafc;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    margin-top: 15px; /* Space between stickers and text */
+}
+
+#customTextInput {
+    flex-grow: 1; /* Allows it to take available space */
+    min-width: 200px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 17px;
+    color: #4a148c;
+    background: linear-gradient(to bottom, #fce4ec, #fffde7);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7);
+    border: 1px solid #ffabcb;
+    transition: all 0.3s ease;
+}
+
+#customTextInput:focus {
+    outline: none;
+    border-color: #d81b60;
+    box-shadow: 0 0 0 4px rgba(255, 128, 171, 0.5), inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+
+/* --- Photo Preview Modal --- */
+.modal {
+    position: fixed;
+    z-index: 1001; /* Above everything else */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* Dark background with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.visible .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 70vh; /* Adjust as needed */
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #d81b60;
+    text-decoration: none;
+}
+
+#modalDownloadButton {
+    /* Uses existing button styles */
+    margin: 0; /* Override margin from general button style */
+}
+
+
+/* --- ANIMATION KEYFRAMES --- */
+
+/* For the main .container glow */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); } /* Subtle initial shadow */
+    50% { box-shadow: 0 15px 45px rgba(255, 128, 171, 0.2), 0 0 10px rgba(255, 128, 171, 0.1); } /* Light pink glow */
+    100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); } /* Return to subtle */
+}
+
+/* For buttons on hover */
+@keyframes buttonGlow {
+    from { box-shadow: 0 10px 25px rgba(233, 30, 99, 0.7); } /* Starting shadow */
+    to { box-shadow: 0 10px 30px rgba(233, 30, 99, 0.9), 0 0 15px rgba(233, 30, 99, 0.4); } /* More intense, slightly larger, with a soft inner glow */
+}
+
+/* For the video preview border */
+@keyframes borderPulse {
+    0% { border-color: #ffb3e6; } /* Light pink */
+    100% { border-color: #ff80ab; } /* A slightly more vibrant pink */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    .countdown-display {
+        font-size: 5em;
+        padding: 15px 30px;
+    }
+    .controls-section, .strip-customization-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    button {
+        width: calc(100% - 20px);
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+    select, input:not([type="color"]) {
+        width: calc(100% - 24px);
+        max-width: none;
+    }
+    .thumbnail-item {
+        width: 100px;
+        height: 75px;
+    }
+    #sticker-palette img {
+        width: 50px;
+        height: 50px;
+    }
+    .close-button {
+        font-size: 30px;
+        top: 10px;
+        right: 15px;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+
+    .text-input-container {
+        flex-direction: column;
+    }
+}
